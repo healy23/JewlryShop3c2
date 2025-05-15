@@ -1,0 +1,37 @@
+﻿@page
+@model JewlryShop2.Pages.JewleryInPurchase.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>JewelryInPurchase</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JewelryInPurchase.Jewelry)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JewelryInPurchase.Jewelry.JewelryID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JewelryInPurchase.Purchase)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JewelryInPurchase.Purchase.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.JewelryInPurchase.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JewelryInPurchase.Quantity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.JewelryInPurchase.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

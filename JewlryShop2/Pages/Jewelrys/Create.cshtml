@@ -1,0 +1,51 @@
+﻿@page
+@model JewlryShop2.Pages.Jewelrys.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Jewelry</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Jewelry.JewelryName" class="control-label"></label>
+                <input asp-for="Jewelry.JewelryName" class="form-control" />
+                <span asp-validation-for="Jewelry.JewelryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jewelry.Price" class="control-label"></label>
+                <input asp-for="Jewelry.Price" class="form-control" />
+                <span asp-validation-for="Jewelry.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jewelry.Material" class="control-label"></label>
+                <input asp-for="Jewelry.Material" class="form-control" />
+                <span asp-validation-for="Jewelry.Material" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Jewelry.ImageName" class="control-label"></label>
+                <input asp-for="Jewelry.ImageName" class="form-control" />
+                <span asp-validation-for="Jewelry.ImageName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,50 @@
+﻿@page
+@model JewlryShop2.Pages.Reviews.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Review</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Review.ID" />
+            <div class="form-group">
+                <label asp-for="Review.Jewelry" class="control-label"></label>
+                <select asp-for="Review.JewelryID" class="form-control" asp-items="ViewBag.JewelryID"></select>
+                <span asp-validation-for="Review.JewelryID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.Customer" class="control-label"></label>
+                <select asp-for="Review.CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <span asp-validation-for="Review.CustomerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.StarAmount" class="control-label"></label>
+                <input asp-for="Review.StarAmount" class="form-control" />
+                <span asp-validation-for="Review.StarAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.Rewiew" class="control-label"></label>
+                <input asp-for="Review.Rewiew" class="form-control" />
+                <span asp-validation-for="Review.Rewiew" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

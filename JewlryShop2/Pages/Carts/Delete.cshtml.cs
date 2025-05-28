@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.JewleryInPurchase
+namespace JewlryShop2.Pages.Carts
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace JewlryShop2.Pages.JewleryInPurchase
         }
 
         [BindProperty]
-        public JewelryInPurchase JewelryInPurchase { get; set; } = default!;
+        public Cart Cart { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace JewlryShop2.Pages.JewleryInPurchase
                 return NotFound();
             }
 
-            var jewelryinpurchase = await _context.JewelryInPurchases.FirstOrDefaultAsync(m => m.ID == id);
+            var cart = await _context.Cart.FirstOrDefaultAsync(m => m.CartId == id);
 
-            if (jewelryinpurchase == null)
+            if (cart == null)
             {
                 return NotFound();
             }
             else
             {
-                JewelryInPurchase = jewelryinpurchase;
+                Cart = cart;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace JewlryShop2.Pages.JewleryInPurchase
                 return NotFound();
             }
 
-            var jewelryinpurchase = await _context.JewelryInPurchases.FindAsync(id);
-            if (jewelryinpurchase != null)
+            var cart = await _context.Cart.FindAsync(id);
+            if (cart != null)
             {
-                JewelryInPurchase = jewelryinpurchase;
-                _context.JewelryInPurchases.Remove(JewelryInPurchase);
+                Cart = cart;
+                _context.Cart.Remove(Cart);
                 await _context.SaveChangesAsync();
             }
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.Purchases
+namespace JewlryShop2.Pages.Items
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace JewlryShop2.Pages.Purchases
         }
 
         [BindProperty]
-        public Purchase Purchase { get; set; } = default!;
+        public Item Item { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace JewlryShop2.Pages.Purchases
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases.FirstOrDefaultAsync(m => m.ID == id);
+            var item = await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (purchase == null)
+            if (item == null)
             {
                 return NotFound();
             }
             else
             {
-                Purchase = purchase;
+                Item = item;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace JewlryShop2.Pages.Purchases
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases.FindAsync(id);
-            if (purchase != null)
+            var item = await _context.Item.FindAsync(id);
+            if (item != null)
             {
-                Purchase = purchase;
-                _context.Purchases.Remove(Purchase);
+                Item = item;
+                _context.Item.Remove(Item);
                 await _context.SaveChangesAsync();
             }
 

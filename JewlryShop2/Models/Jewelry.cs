@@ -17,6 +17,7 @@
 
 
         public ICollection<Review> Reviews { get; set; }
+        public List<Item> Items { get; set; }
 
     }
 }

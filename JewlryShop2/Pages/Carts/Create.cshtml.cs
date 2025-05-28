@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.Purchases
+namespace JewlryShop2.Pages.Carts
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace JewlryShop2.Pages.Purchases
         }
 
         [BindProperty]
-        public Purchase Purchase { get; set; } = default!;
+        public Cart Cart { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +35,7 @@ namespace JewlryShop2.Pages.Purchases
                 return Page();
             }
 
-            _context.Purchases.Add(Purchase);
+            _context.Cart.Add(Cart);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

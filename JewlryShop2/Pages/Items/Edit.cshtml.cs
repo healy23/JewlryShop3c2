@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.JewleryInPurchase
+namespace JewlryShop2.Pages.Items
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace JewlryShop2.Pages.JewleryInPurchase
         }
 
         [BindProperty]
-        public JewelryInPurchase JewelryInPurchase { get; set; } = default!;
+        public Item Item { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,14 +30,14 @@ namespace JewlryShop2.Pages.JewleryInPurchase
                 return NotFound();
             }
 
-            var jewelryinpurchase =  await _context.JewelryInPurchases.FirstOrDefaultAsync(m => m.ID == id);
-            if (jewelryinpurchase == null)
+            var item =  await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
             {
                 return NotFound();
             }
-            JewelryInPurchase = jewelryinpurchase;
+            Item = item;
+           ViewData["CartID"] = new SelectList(_context.Cart, "CartId", "CartId");
            ViewData["JewelryID"] = new SelectList(_context.Jewelrys, "JewelryID", "JewelryID");
-           ViewData["PurchaseID"] = new SelectList(_context.Purchases, "ID", "ID");
             return Page();
         }
 
@@ -50,7 +50,7 @@ namespace JewlryShop2.Pages.JewleryInPurchase
                 return Page();
             }
 
-            _context.Attach(JewelryInPurchase).State = EntityState.Modified;
+            _context.Attach(Item).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace JewlryShop2.Pages.JewleryInPurchase
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JewelryInPurchaseExists(JewelryInPurchase.ID))
+                if (!ItemExists(Item.Id))
                 {
                     return NotFound();
                 }
@@ -71,9 +71,9 @@ namespace JewlryShop2.Pages.JewleryInPurchase
             return RedirectToPage("./Index");
         }
 
-        private bool JewelryInPurchaseExists(int id)
+        private bool ItemExists(int id)
         {
-            return _context.JewelryInPurchases.Any(e => e.ID == id);
+            return _context.Item.Any(e => e.Id == id);
         }
     }
 }

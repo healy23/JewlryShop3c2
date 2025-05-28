@@ -30,6 +30,11 @@
                 <span asp-validation-for="Jewelry.Material" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Jewelry.ImageName" class="control-label"></label>
+                <input asp-for="Jewelry.ImageName" class="form-control" />
+                <span asp-validation-for="Jewelry.ImageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

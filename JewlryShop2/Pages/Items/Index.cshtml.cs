@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.Purchases
+namespace JewlryShop2.Pages.Items
 {
     public class IndexModel : PageModel
     {
@@ -19,18 +19,13 @@ namespace JewlryShop2.Pages.Purchases
             _context = context;
         }
 
-        public IList<Purchase> Purchase { get;set; } = default!;
+        public IList<Item> Item { get;set; } = default!;
 
-        public async Task OnGetAsync(string SearchString)
+        public async Task OnGetAsync()
         {
-            IQueryable<Purchase> PurchasesIQ = from p in _context.Purchases select p;
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                PurchasesIQ = PurchasesIQ.Where(s => s.Status.Contains(SearchString));
-               
-            }
-
-            Purchase = await _context.Purchases.ToListAsync();
+            Item = await _context.Item
+                .Include(i => i.Cart)
+                .Include(i => i.Jewelry).ToListAsync();
         }
     }
 }

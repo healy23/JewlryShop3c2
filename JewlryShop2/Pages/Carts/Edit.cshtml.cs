@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.Purchases
+namespace JewlryShop2.Pages.Carts
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace JewlryShop2.Pages.Purchases
         }
 
         [BindProperty]
-        public Purchase Purchase { get; set; } = default!;
+        public Cart Cart { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,12 @@ namespace JewlryShop2.Pages.Purchases
                 return NotFound();
             }
 
-            var purchase =  await _context.Purchases.FirstOrDefaultAsync(m => m.ID == id);
-            if (purchase == null)
+            var cart =  await _context.Cart.FirstOrDefaultAsync(m => m.CartId == id);
+            if (cart == null)
             {
                 return NotFound();
             }
-            Purchase = purchase;
+            Cart = cart;
             return Page();
         }
 
@@ -48,7 +48,7 @@ namespace JewlryShop2.Pages.Purchases
                 return Page();
             }
 
-            _context.Attach(Purchase).State = EntityState.Modified;
+            _context.Attach(Cart).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace JewlryShop2.Pages.Purchases
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PurchaseExists(Purchase.ID))
+                if (!CartExists(Cart.CartId))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace JewlryShop2.Pages.Purchases
             return RedirectToPage("./Index");
         }
 
-        private bool PurchaseExists(int id)
+        private bool CartExists(int id)
         {
-            return _context.Purchases.Any(e => e.ID == id);
+            return _context.Cart.Any(e => e.CartId == id);
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.JewleryInPurchase
+namespace JewlryShop2.Pages.Carts
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,11 @@ namespace JewlryShop2.Pages.JewleryInPurchase
             _context = context;
         }
 
-        public IList<JewelryInPurchase> JewelryInPurchase { get;set; } = default!;
+        public IList<Cart> Cart { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            JewelryInPurchase = await _context.JewelryInPurchases
-                .Include(j => j.Jewelry)
-                .Include(j => j.Purchase).ToListAsync();
+            Cart = await _context.Cart.ToListAsync();
         }
     }
 }

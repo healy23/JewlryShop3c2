@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.Purchases
+namespace JewlryShop2.Pages.Carts
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace JewlryShop2.Pages.Purchases
             _context = context;
         }
 
-        public Purchase Purchase { get; set; } = default!;
+        public Cart Cart { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace JewlryShop2.Pages.Purchases
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases.FirstOrDefaultAsync(m => m.ID == id);
-            if (purchase == null)
+            var cart = await _context.Cart.FirstOrDefaultAsync(m => m.CartId == id);
+            if (cart == null)
             {
                 return NotFound();
             }
             else
             {
-                Purchase = purchase;
+                Cart = cart;
             }
             return Page();
         }

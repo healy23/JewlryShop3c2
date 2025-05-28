@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewlryShop2.Data;
 using JewlryShop2.Models;
 
-namespace JewlryShop2.Pages.JewleryInPurchase
+namespace JewlryShop2.Pages.Items
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace JewlryShop2.Pages.JewleryInPurchase
             _context = context;
         }
 
-        public JewelryInPurchase JewelryInPurchase { get; set; } = default!;
+        public Item Item { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace JewlryShop2.Pages.JewleryInPurchase
                 return NotFound();
             }
 
-            var jewelryinpurchase = await _context.JewelryInPurchases.FirstOrDefaultAsync(m => m.ID == id);
-            if (jewelryinpurchase == null)
+            var item = await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
+            if (item == null)
             {
                 return NotFound();
             }
             else
             {
-                JewelryInPurchase = jewelryinpurchase;
+                Item = item;
             }
             return Page();
         }

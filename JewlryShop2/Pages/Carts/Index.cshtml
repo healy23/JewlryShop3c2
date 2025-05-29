@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Carts</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,8 +13,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+          @*    שינוי לנראות טובה יותר  *@
+           @*  <th>
                 @Html.DisplayNameFor(model => model.Cart[0].CustomerName)
+            </th> *@
+            <th>
+                Customer Name
             </th>
             <th></th>
         </tr>

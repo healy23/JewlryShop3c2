@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>לקוחות</h1>
+<h1>Customers</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -34,8 +34,11 @@
                 @Html.DisplayNameFor(model => model.Customer[0].Gmail)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].ClubMembership)
+                Club Membership
             </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Customer[0].ClubMembership)
+            </th> *@
             <th></th>
         </tr>
     </thead>

@@ -1,11 +1,12 @@
 ﻿@page
-@model JewlryShop2.Pages.Items.IndexModel
+@model JewlryShop2.Pages.Items.CartItemsModel
 
 @{
-    ViewData["Title"] = "Items";
+    ViewData["Title"] = "CartItems";
+    double TotalCartPrice = 0 ; 
 }
 
-<h1>Items</h1>
+<h1>Items in Cart Num @Model.CartId</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,26 +15,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Item[0].Cart)
+                @Html.DisplayNameFor(model => model.CartItems[0].Cart.CustomerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Item[0].Cart.CustomerName)
+                @Html.DisplayNameFor(model => model.CartItems[0].Jewelry)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Item[0].Jewelry)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Item[0].Amount)
+                @Html.DisplayNameFor(model => model.CartItems[0].Amount)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Item) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cart.CartId)
-            </td>
+        @foreach (var item in Model.CartItems) 
+        {
+            TotalCartPrice += item.Jewelry.Price * item.Amount;   
+         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Cart.CustomerName)
             </td>
@@ -44,7 +41,6 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @* <a class"btn btn-primary" asp-page="/Items/CartItemsList" asp-route-CartId="@item.Id">Items in Cart</a> *@
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -53,3 +49,4 @@
 }
     </tbody>
 </table>
+<span> Total Price: @TotalCartPrice</span>

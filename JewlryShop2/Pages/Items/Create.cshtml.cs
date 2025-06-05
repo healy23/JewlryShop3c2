@@ -21,8 +21,8 @@ namespace JewlryShop2.Pages.Items
 
         public IActionResult OnGet()
         {
-        ViewData["CartID"] = new SelectList(_context.Cart, "CartId", "CartId");
-        ViewData["JewelryID"] = new SelectList(_context.Jewelrys, "JewelryID", "JewelryID");
+            ViewData["CartID"] = new SelectList(_context.Cart, "CartId", "CartId");
+            ViewData["JewelryID"] = new SelectList(_context.Jewelrys, "JewelryID", "JewelryName");
             return Page();
         }
 

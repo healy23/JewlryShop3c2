@@ -21,8 +21,13 @@ namespace JewlryShop2.Pages.Carts
 
         public IActionResult OnGet()
         {
+            ViewData["CustomerID"] = new SelectList(_context.Customers, "ID", "Name");
             return Page();
         }
+        //public IActionResult OnGet()
+        //{
+        //    return Page();
+        //}
 
         [BindProperty]
         public Cart Cart { get; set; } = default!;

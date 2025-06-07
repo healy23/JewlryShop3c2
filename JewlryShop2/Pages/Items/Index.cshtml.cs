@@ -25,6 +25,7 @@ namespace JewlryShop2.Pages.Items
         {
             Item = await _context.Item
                 .Include(i => i.Cart)
+                .Include(i => i.Cart.Customer)
                 .Include(i => i.Jewelry).ToListAsync();
         }
     }

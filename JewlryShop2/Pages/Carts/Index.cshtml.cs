@@ -23,7 +23,13 @@ namespace JewlryShop2.Pages.Carts
 
         public async Task OnGetAsync()
         {
-            Cart = await _context.Cart.ToListAsync();
+            Cart = await _context.Cart.
+                  Include(i => i.Customer).ToListAsync();
         }
+        //   Cart = await _context.Cart.ToListAsync();
+        //}
+        //    Cart = await _context.Cart.
+        //        Include(i => i.Customer).ToListAsync();
+        //}
     }
 }

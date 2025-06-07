@@ -23,11 +23,10 @@
         </p>
     </div>
 </form>
-<table class="table">
-    <thead>
+<div class="grid-container">
+   @*  <thead>
         <tr>
             <th>
-               @*  @Html.DisplayNameFor(model => model.Jewelry[0].JewelryName) *@
                 Jewelry Name 
             </th>
             <th>
@@ -42,27 +41,22 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model.Jewelry) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.JewelryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-                <td >
-                    <img src="~/images/@item.ImageName" width="150" height="150 " />
-                </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.JewelryID">Edit</a> |
+    <tbody> *@
+
+@foreach (var item in Model.Jewelry) 
+{
+    <div class="grid-item">
+            <img src="~/images/@item.ImageName" width="150" height="150 " />
+        
+            <div>  @Html.DisplayFor(modelItem => item.JewelryName) </div>
+            <div>@Html.DisplayFor(modelItem => item.Material) </div>
+            <div> @Html.DisplayFor(modelItem => item.Price) </div>
+              
+            <div> <a asp-page="./Edit" asp-route-id="@item.JewelryID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.JewelryID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.JewelryID">Delete</a>
-            </td>
-        </tr>
+            </div>
+     </div>
+
 }
-    </tbody>
-</table>
+</div>

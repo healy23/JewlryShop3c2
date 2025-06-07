@@ -28,7 +28,10 @@ namespace JewlryShop2.Pages.Items
                 return NotFound();
             }
 
-            var item = await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _context.Item
+                 .Include(i => i.Cart)
+                .Include(i => i.Jewelry).
+                FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();

@@ -32,7 +32,7 @@
             TotalCartPrice += item.Jewelry.Price * item.Amount;   
          <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Cart.CustomerName)
+                @Html.DisplayFor(modelItem => item.Cart.Customer.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Jewelry.JewelryName)

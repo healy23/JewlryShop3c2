@@ -28,7 +28,10 @@
                 @Html.DisplayNameFor(model => model.Review[0].Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Review[0].Jewelry)
+                Jewelry Name
+            </th>
+            <th>
+               Image
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Review[0].Rewiew)
@@ -40,13 +43,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Review) {
+@foreach (var item in Model.Review) 
+{
         <tr>
+               
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Jewelry.JewelryName)
+                    @Html.DisplayFor(modelItem => item.Jewelry.JewelryName)
+            </td>
+            <td>
+                <img src="~/images/@item.Jewelry.ImageName" width="150" height="150 " />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rewiew)

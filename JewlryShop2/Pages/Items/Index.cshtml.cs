@@ -21,12 +21,43 @@ namespace JewlryShop2.Pages.Items
 
         public IList<Item> Item { get;set; } = default!;
 
+
         public async Task OnGetAsync()
+
         {
-            Item = await _context.Item
-                .Include(i => i.Cart)
-                .Include(i => i.Cart.Customer)
-                .Include(i => i.Jewelry).ToListAsync();
+
+            // && i.Customer.Gmail == sessionGmail
+
+            string sessionGmail = HttpContext.Session.GetString("Gmail");
+            string sessionUserType = HttpContext.Session.GetString("UserType");
+
+            if (sessionUserType == "Admin")
+            {
+                Item = await _context.Item.Include(i => i.Cart)
+                    .Include(i => i.Cart.Customer).Include(i => i.Jewelry).ToListAsync();
+
+            }
+            else
+            {
+
+                Item = await _context.Item.Include(i => i.Cart)
+                    .Include(i => i.Cart.Customer).Where(i => i.Cart.Customer.Gmail == sessionGmail).Include(i => i.Jewelry).ToListAsync();
+
+            }
+
         }
+        //   Cart = await _context.Cart.ToListAsync();
+        //}
+        //    Cart = await _context.Cart.
+        //        Include(i => i.Customer && i.).ToListAsync();
+        //}
     }
+    //public async Task OnGetAsync()
+    //{
+    //    Item = await _context.Item
+    //        .Include(i => i.Cart)
+    //        .Include(i => i.Cart.Customer)
+    //        .Include(i => i.Jewelry).ToListAsync();
+    //}
 }
+

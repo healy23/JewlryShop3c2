@@ -22,6 +22,26 @@ namespace JewlryShop2.Pages.Items
         [BindProperty]
         public Item Item { get; set; } = default!;
 
+
+        //public async Task<IActionResult> OnGetAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var item = await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
+
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        Item = item;
+        //    }
+        //    return Page();
+        //}
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -29,16 +49,17 @@ namespace JewlryShop2.Pages.Items
                 return NotFound();
             }
 
-            var item = await _context.Item.FirstOrDefaultAsync(m => m.Id == id);
+            Item = await _context.Item
+                .Include(i => i.Cart)
+                .ThenInclude(c => c.Customer) // if you also use customer name
+                .Include(i => i.Jewelry)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (item == null)
+            if (Item == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Item = item;
-            }
+
             return Page();
         }
 

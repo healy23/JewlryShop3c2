@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Items.IndexModel
 
 @{
@@ -50,7 +50,7 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @* <a class"btn btn-primary" asp-page="/Items/CartItemsList" asp-route-CartId="@item.Id">Items in Cart</a> *@
+                
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -59,3 +59,54 @@
 }
     </tbody>
 </table>
+ *@
+
+
+@page
+@model JewlryShop2.Pages.Items.IndexModel
+
+@{
+    ViewData["Title"] = "Items";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Your Jewelry Items</h1>
+        <p class="hero-subtitle">Browse through the items in your collection</p>
+        <a asp-page="Create" class="btn-gold">+ Add New Item</a>
+    </div>
+</section>
+
+<div class="table-wrapper" style="padding: 40px;">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Cart ID</th>
+                <th>Customer Name</th>
+                <th>Jewelry</th>
+                <th>Image</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Item)
+            {
+                <tr>
+                    <td>@item.Cart.CartId</td>
+                    <td>@item.Cart.Customer.Name</td>
+                    <td>@item.Jewelry.JewelryName</td>
+                    <td>
+                        <img src="~/images/@item.Jewelry.ImageName" class="table-img" alt="@item.Jewelry.JewelryName" />
+                    </td>
+                    <td>@item.Amount</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-link danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

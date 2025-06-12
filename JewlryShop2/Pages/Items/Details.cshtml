@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Items.DetailsModel
 
 @{
@@ -34,4 +34,37 @@
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Item.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
+</div>
+ *@
+
+@page
+@model JewlryShop2.Pages.Items.DetailsModel
+
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Item Details</h1>
+        <p class="hero-subtitle">See all the details for this jewelry cart item</p>
+    </div>
+</section>
+
+<div class="form-container">
+    <dl class="styled-details">
+        <dt>Amount</dt>
+        <dd>@Model.Item.Amount</dd>
+
+        <dt>Jewelry Name</dt>
+        <dd>@Model.Item.Jewelry?.JewelryName</dd>
+
+        <dt>Cart ID</dt>
+        <dd>@Model.Item.Cart?.CartId</dd>
+    </dl>
+
+    <div class="form-actions">
+        <a asp-page="./Edit" asp-route-id="@Model.Item.Id" class="btn-gold">Edit</a>
+        <a asp-page="./Index" class="btn-link">Back to List</a>
+    </div>
 </div>

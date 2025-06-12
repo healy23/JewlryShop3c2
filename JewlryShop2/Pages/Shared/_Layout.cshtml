@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http
 @{
-   
+
     string sessionGmail = Context.Session.GetString("Gmail");
     string sessionUserType = Context.Session.GetString("UserType");
+    string sessionName = Context.Session.GetString("Name");
 
 
 }
@@ -35,8 +36,35 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">About Us</a>
                         </li>
                         } *@
-                        
-                        <li class="nav-item">
+
+
+                        @if (sessionUserType == "Admin" || sessionUserType == "Customer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Jewelrys/Index">Jewelry</a>
+                            </li>
+
+                            @if (sessionUserType == "Admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Customers/Index">Customers</a>
+                                </li>
+
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Reviews/Index">Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Items/Index">Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Carts/Index">Carts</a>
+                            </li>
+
+                        }
+
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Jewelrys/Index">Jewelry</a>
                         </li>
 
@@ -48,10 +76,6 @@
                             
                         }
                      
-                        
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Purchases/Index">Basket</a>
-                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Reviews/Index">Reviews</a>
                         </li>
@@ -60,11 +84,26 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Carts/Index">Carts</a>
-                        </li>
+                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login/LogIn">LogIn</a>
                         </li>
+
                     </ul>
+                 @*    // ניסיון לעשות לוג אאוט *@
+                    @* @if (string.IsNullOrEmpty(sessionUserType)) *@
+                    @if (string.IsNullOrEmpty(sessionName))
+                    {
+                        <span class=“navbar-text”>welcome Visitor</span>
+                    }
+                    else 
+                    {
+                        <span class=“navbar-text”>welcome @sessionName</span>
+                        <div class=“d-flex”>
+                          @*   // בהתחלה הפייג אחרי זה השאר *@
+                            <a class=“btn btn-outline-dark btn-sm ms-1” href="/Login/Logout" role="button">Logout</a> 
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
@@ -74,7 +113,7 @@
         @RenderBody()
     </main>
 
-  @*   <div class="container">
+    @*   <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

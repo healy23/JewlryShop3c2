@@ -30,6 +30,7 @@ namespace JewlryShop2.Pages.Login
                 bool isAdmin = user.Gmail == "admin@yourshop.com"; // set your real admin email here
 
                 HttpContext.Session.SetString("Gmail", user.Gmail);
+                HttpContext.Session.SetString("Name", user.Name);
                 HttpContext.Session.SetString("UserType", isAdmin ? "Admin" : "Customer");
                 HttpContext.Session.SetInt32("CustomerId", user.ID); // for easier filtering
 

@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Reviews.IndexModel
 
 @{
@@ -71,3 +71,67 @@
 }
     </tbody>
 </table>
+ *@
+
+@page
+@model JewlryShop2.Pages.Reviews.IndexModel
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Customer Reviews</h1>
+        <p class="hero-subtitle">See what our customers are saying about our jewelry</p>
+    </div>
+</section>
+
+<div class="table-wrapper">
+    <div class="back-link">
+        <a asp-page="Create" class="btn-gold">➕ Create New Review</a>
+    </div>
+
+    <form method="get" class="styled-form" style="margin-top: 30px;">
+        <div class="form-group">
+            <label class="form-label">Find by jewelry name or star amount:</label>
+            <input type="text" name="SearchString" class="form-control" />
+        </div>
+        <div style="margin-top: 10px;">
+            <input type="submit" value="Search" class="btn-gold" />
+            <a asp-page="./Index" class="btn-link">Back to full List</a>
+        </div>
+    </form>
+
+    <table class="styled-table" style="margin-top: 30px;">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Review[0].Customer)</th>
+                <th>Jewelry Name</th>
+                <th>Image</th>
+                <th>@Html.DisplayNameFor(model => model.Review[0].Rewiew)</th>
+                <th>Star Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Review)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Jewelry.JewelryName)</td>
+                    <td>
+                        <img src="~/images/@item.Jewelry.ImageName" class="table-img" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Rewiew)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StarAmount)</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.ID" class="btn-link">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.ID" class="btn-link">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn-link danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

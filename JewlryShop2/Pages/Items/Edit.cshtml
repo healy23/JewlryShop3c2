@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Items.EditModel
 
 @{
@@ -42,4 +42,59 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ *@
+
+
+@page
+@model JewlryShop2.Pages.Items.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Edit Item</h1>
+        <p class="hero-subtitle">Update the details of the selected item</p>
+    </div>
+</section>
+
+<div class="form-container">
+    <form method="post" class="styled-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Item.Id" />
+
+        <div class="form-group">
+            <label asp-for="Item.Amount" class="form-label"></label>
+            <input asp-for="Item.Amount" class="form-control" />
+            <span asp-validation-for="Item.Amount" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Item.JewelryID" class="form-label"></label>
+            <select asp-for="Item.JewelryID" class="form-control" asp-items="ViewBag.JewelryID"></select>
+            <span asp-validation-for="Item.JewelryID" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Item.CartID" class="form-label"></label>
+            <select asp-for="Item.CartID" class="form-control" asp-items="ViewBag.CartID"></select>
+            <span asp-validation-for="Item.CartID" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-gold">Save Changes</button>
+        </div>
+    </form>
+
+    <div class="back-link">
+        <a asp-page="./Index" class="btn-link">← Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

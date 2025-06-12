@@ -1,0 +1,36 @@
+﻿@page
+@model JewlryShop2.Pages.Login.IndexModel
+@{
+    ViewData["Title"] = "התחברות";
+    Layout = "_Layout";
+    ViewData["NavClass"] = "login-page"; // נשתמש בזה להוסיף מחלקה ל־navbar
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow rounded-4 p-4">
+        <h2 class="text-center mb-4 text-primary">התחברות למערכת</h2>
+
+        <form method="post">
+            <div class="mb-3">
+                <label for="Gmail" class="form-label">הקלד אימייל</label>
+                <input type="text" id="Gmail" name="Gmail" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">התחבר</button>
+        </form>
+
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger mt-3 text-center">
+                @Model.ErrorMessage
+            </div>
+
+        }
+
+        <hr />
+        <div class="text-center mt-3">
+
+            <a href="/Customers/Create" class="text-decoration-none">עוד לא רשום? צור משתמש חדש</a>
+        </div>
+    </div>
+</div>

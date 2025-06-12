@@ -2,61 +2,84 @@
 @model JewlryShop2.Pages.Jewelrys.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "תכשיטים";
 }
 
-<h1>Jewelrys</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<form>
-
-            
-    <div>
-        <p>
-            Find by Material:
-            <input type="text" name="SearchString" />
-            <input type="submit" value="Search" class="btn btn-primary" />
-            <a asp-page="./Index">Back to full List</a>
-            
-        </p>
+<!-- 🖼️ קרוסלה של תמונות -->
+<div id="JewelryCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="@Url.Content("~/images/Rings.jpg")" class="d-block w-100" style="height: 200px; object-fit: cover;" alt="טבעת פנינים" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/Girls.jpg")" class="d-block w-100" style="height: 200px; object-fit: cover;" alt="סט טיפה" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/prettyGirl.jpg")" class="d-block w-100" style="height: 200px; object-fit: cover;" alt="סט V" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/pictureForFirst.jpg")" class="d-block w-100" style="height: 200px; object-fit: cover;" alt="סט פרפר" />
+        </div>
     </div>
-</form>
-<div class="grid-container">
-   @*  <thead>
-        <tr>
-            <th>
-                Jewelry Name 
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Jewelry[0].Material)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Jewelry[0].Price)
-            </th>
-            <th>
-               Image
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody> *@
 
-@foreach (var item in Model.Jewelry) 
-{
-    <div class="grid-item">
-            <img src="~/images/@item.ImageName" width="150" height="150 " />
-        
-            <div>  @Html.DisplayFor(modelItem => item.JewelryName) </div>
-            <div>@Html.DisplayFor(modelItem => item.Material) </div>
-            <div> @Html.DisplayFor(modelItem => item.Price) </div>
-              
-            <div> <a asp-page="./Edit" asp-route-id="@item.JewelryID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.JewelryID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.JewelryID">Delete</a>
+    <button class="carousel-control-prev" type="button" data-bs-target="#JewelryCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#JewelryCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- 🔍 טופס חיפוש -->
+<div class="mb-4">
+    <form class="d-flex align-items-center gap-3">
+        <label class="form-label mb-0" for="SearchString">חיפוש לפי חומר:</label>
+        <input type="text" name="SearchString" class="form-control w-auto" />
+        <input type="submit" value="חפש" class="btn btn-primary" />
+        <a asp-page="./Index" class="btn btn-secondary">הצג הכל</a>
+    </form>
+</div>
+
+<!-- ➕ קישור ליצירת תכשיט חדש -->
+<div class="mb-3">
+    <a class="btn btn-success" asp-page="Create">➕ הוסף תכשיט חדש</a>
+</div>
+
+<!-- 🧱 גריד של תכשיטים -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-5 g-5">
+    @foreach (var item in Model.Jewelry)
+    {
+        <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+                <img src="@Url.Content("~/images/" + item.ImageName)" class="card-img-top" style="height: 190px; object-fit: cover;" alt="@item.JewelryName" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.JewelryName</h5>
+                    <p class="card-text">חומר: @item.Material</p>
+                    <p class="card-text text-success fw-bold">מחיר: ₪@item.Price</p>
+                </div>
+
+                <div class="card-footer d-flex justify-content-center gap-2">
+                    @if (HttpContext.Session.GetString("UserType") == "Admin")
+                    {
+                        <a class="btn btn-sm btn-warning" asp-page="./Edit" asp-route-id="@item.JewelryID">ערוך</a>
+                    }
+
+                    <a class="btn btn-sm btn-info text-white" asp-page="./Details" asp-route-id="@item.JewelryID">פרטים</a>
+                    <a class="btn btn-sm btn-info text-white" asp-page="/Reviews/Index" asp-route-id="@item.JewelryID">לביקורות</a>
+
+                    @if (HttpContext.Session.GetString("UserType") == "Admin")
+                    {
+                        <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@item.JewelryID">מחק</a>
+                    }
+
+
+
+
+                </div>
             </div>
-     </div>
-
-}
+        </div>
+    }
 </div>

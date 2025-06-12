@@ -19,17 +19,59 @@
 
 
 <!-- Hero banner: full width, no container -->
-<div class="hero-section">
+ <div class="hero-section">
     <div class="hero-content">
         <h1 class="hero-title">Welcome to Lilly's Jewelry Shop</h1>
         <p class="hero-subtitle">Elegant, timeless pieces crafted with love.</p>
         <img src="~/Images/TheLogo.png" class="hero-image" alt="Healy Jewelry Logo">
     </div>
 </div>
+ 
+@* <section class="hero-section">
+    <div class="hero-layout">
+
+        <!-- LEFT: Your Logo -->
+        <div class="hero-logo">
+            <img src="@Url.Content("~/Images/TheLogo.png")" alt="Logo">
+
+
+        </div>
+
+        <!-- CENTER: Title and Slideshow -->
+        <div class="hero-content">
+            <h1 class="hero-title">Custom Handmade Jewelry</h1>
+            <p class="hero-subtitle">Timeless pieces crafted with love and detail</p>
+
+            <div class="hero-slider">
+                <img id="hero-slider-image" src="@Url.Content("~/Images/Heartset.png")" alt="Jewelry Slideshow">
+
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    const heroImages = [
+        "@Url.Content("~/Images/Heartset.png")",
+        "@Url.Content("~/Images/tearset.jpg")",
+        "@Url.Content("~/Images/diamondring.jpg")",
+        "@Url.Content("~/Images/engagmentring.jpg")"
+    ];
+
+    let index = 0;
+    const heroSlider = document.getElementById("hero-slider-image");
+
+    setInterval(() => {
+        index = (index + 1) % heroImages.length;
+        heroSlider.src = heroImages[index];
+    }, 4000);
+</script> *@
 
 <!-- Other page content inside container -->
 <div class="container mt-5">
-    <p>This text, product list, or anything else will be nicely centered with padding.</p>
+    <p>My jewelry shop</p>
 </div>
 
 

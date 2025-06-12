@@ -9,6 +9,15 @@ namespace JewlryShop2
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add Session service
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             //שתי השורות שצריך להוסיף
@@ -28,16 +37,21 @@ namespace JewlryShop2
                 app.UseHsts();
             }
 
+          
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapRazorPages();
 
             app.Run();
+         
+
         }
     }
 }

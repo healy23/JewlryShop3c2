@@ -22,14 +22,32 @@ namespace JewlryShop2.Pages.Carts
         public IList<Cart> Cart { get;set; } = default!;
 
         public async Task OnGetAsync()
+
         {
-            Cart = await _context.Cart.
+
+            // && i.Customer.Gmail == sessionGmail
+
+            string sessionGmail = HttpContext.Session.GetString("Gmail");
+            string sessionUserType = HttpContext.Session.GetString("UserType");
+
+            if (sessionUserType == "Admin")
+            {
+                Cart = await _context.Cart.
                   Include(i => i.Customer).ToListAsync();
+
+            }
+            else
+            {
+                Cart = await _context.Cart.
+                      Include(i => i.Customer).Where(i => i.Customer.Gmail == sessionGmail).ToListAsync();
+
+            }
+               
         }
         //   Cart = await _context.Cart.ToListAsync();
         //}
         //    Cart = await _context.Cart.
-        //        Include(i => i.Customer).ToListAsync();
+        //        Include(i => i.Customer && i.).ToListAsync();
         //}
     }
 }

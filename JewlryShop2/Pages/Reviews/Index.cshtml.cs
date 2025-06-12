@@ -37,11 +37,17 @@ namespace JewlryShop2.Pages.Reviews
           
         } */
 
-        public async Task OnGetAsync(string SearchString)
+        public async Task OnGetAsync(string SearchString="", int id=0)
         {
             IQueryable<Review> ReviewsIQ = _context.Reviews
                 .Include(r => r.Customer)
                 .Include(r => r.Jewelry); // Ensure Jewelry is included for filtering
+
+            if (id !=0)
+            {
+                ReviewsIQ = ReviewsIQ.Where(r => r.JewelryID == id);
+            }
+
 
             if (!string.IsNullOrEmpty(SearchString))
             {
@@ -51,7 +57,7 @@ namespace JewlryShop2.Pages.Reviews
                 }
                 else // If not a number, search by Jewelry name
                 {
-                    ReviewsIQ = ReviewsIQ.Where(r => r.Jewelry.JewelryName.Contains(SearchString));
+                    ReviewsIQ = ReviewsIQ.Where(r => r.Jewelry.JewelryName.Contains(SearchString)).OrderByDescending(r => r.StarAmount);
                 }
             }
 

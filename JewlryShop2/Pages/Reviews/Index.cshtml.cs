@@ -1,12 +1,13 @@
-﻿using System;
+﻿using JewlryShop2.Data;
+using JewlryShop2.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using JewlryShop2.Data;
-using JewlryShop2.Models;
 
 namespace JewlryShop2.Pages.Reviews
 {
@@ -39,6 +40,8 @@ namespace JewlryShop2.Pages.Reviews
 
         public async Task OnGetAsync(string SearchString="", int id=0)
         {
+            
+
             IQueryable<Review> ReviewsIQ = _context.Reviews
                 .Include(r => r.Customer)
                 .Include(r => r.Jewelry); // Ensure Jewelry is included for filtering

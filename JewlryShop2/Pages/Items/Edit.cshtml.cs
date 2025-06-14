@@ -37,7 +37,7 @@ namespace JewlryShop2.Pages.Items
             }
             Item = item;
            ViewData["CartID"] = new SelectList(_context.Cart, "CartId", "CartId");
-           ViewData["JewelryID"] = new SelectList(_context.Jewelrys, "JewelryID", "JewelryID");
+           ViewData["JewelryID"] = new SelectList(_context.Jewelrys, "JewelryID", "JewelryName");
             return Page();
         }
 

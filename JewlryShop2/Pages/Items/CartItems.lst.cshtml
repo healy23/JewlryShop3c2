@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "CartItems";
-    double TotalCartPrice = 0 ; 
+    double TotalCartPrice = 0.00 ; 
 }
 
 <h1>Items in Cart Num @Model.CartId</h1>
@@ -29,8 +29,11 @@
     <tbody>
         @foreach (var item in Model.CartItems) 
         {
-            TotalCartPrice += item.Jewelry.Price * item.Amount;   
-         <tr>
+
+            @* TotalCartPrice += item.Jewelry.Price * item.Amount; *@   
+            TotalCartPrice = TotalCartPrice + item.Jewelry.Price * item.Amount;
+
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Cart.Customer.Name)
             </td>

@@ -10,6 +10,9 @@
 
         public string ClubMembership { get; set; }
 
+        public string Password { get; set; }
+
+
         public ICollection<Review> Reviews { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Customers.IndexModel
 
 @{
@@ -36,9 +36,6 @@
             <th>
                 Club Membership
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.Customer[0].ClubMembership)
-            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -66,3 +63,68 @@
 }
     </tbody>
 </table>
+ *@
+
+@page
+@model JewlryShop2.Pages.Customers.IndexModel
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="table-wrapper">
+    <h1 class="hero-title">Customers</h1>
+
+    <p>
+        <a class="btn-gold" asp-page="Create">+ Add New Customer</a>
+    </p>
+    <form method="get" class="styled-form">
+        <div class="form-group search-bar-wrapper">
+            <label for="SearchString" class="form-label">Find by club membership:</label>
+            <div class="search-bar">
+                @* הפלייס הולדרק זה כאילו דוגמא *@
+                <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
+                <button type="submit" class="btn-gold">Search</button>
+                <a class="btn-link" asp-page="./Index">Back to Full List</a>
+            </div>
+        </div>
+    </form>
+
+    @* <form method="get" class="styled-form">
+        <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
+            <label for="SearchString" class="form-label" style="margin: 0;">Find by club membership:</label>
+            
+            <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
+            <input type="submit" value="Search" class="btn-gold" />
+            <a class="btn-link" asp-page="./Index">Back to Full List</a>
+        </div> *@
+    @* </form> *@
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Customer[0].Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Customer[0].LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Customer[0].Gmail)</th>
+                <th>Club Membership</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Customer)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gmail)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ClubMembership)</td>
+                    <td>
+                        <a class="btn-link" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a class="btn-link" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                        <a class="btn-link danger" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

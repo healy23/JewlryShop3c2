@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Login.IndexModel
 @{
     ViewData["Title"] = "התחברות";
@@ -8,24 +8,38 @@
 
 <div class="container mt-5" style="max-width: 500px;">
     <div class="card shadow rounded-4 p-4">
-        <h2 class="text-center mb-4 text-primary">התחברות למערכת</h2>
-
-        <form method="post">
-            <div class="mb-3">
-                <label for="Gmail" class="form-label">הקלד אימייל</label>
-                <input type="text" id="Gmail" name="Gmail" class="form-control" required />
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">התחבר</button>
-        </form>
-
-        @if (Model.ErrorMessage != null)
-        {
-            <div class="alert alert-danger mt-3 text-center">
-                @Model.ErrorMessage
-            </div>
-
+        // כל מי שלא רשום מקבל הודעה כזו
+        @{
+            var infoMessage = Request.Query["info"];
         }
+
+        @if (infoMessage == "register")
+        {
+            <div class="alert alert-info text-center">
+                Registe to our website for more
+            </div>
+        }
+        <h2 class="text-center mb-4 text-primary">התחברות למערכת</h2>
+        
+        <form method="post" class="styled-form container">
+            <div class="form-group mb-3">
+                <label>Gmail</label>
+                <input type="text" name="Gmail" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+                <label>Password</label>
+                <input type="password" name="Password" class="form-control" />
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger">@Model.ErrorMessage</div>
+            }
+        </form>
+        
+
 
         <hr />
         <div class="text-center mt-3">
@@ -33,4 +47,121 @@
             <a href="/Customers/Create" class="text-decoration-none">עוד לא רשום? צור משתמש חדש</a>
         </div>
     </div>
+</div> *@
+
+@page
+@model JewlryShop2.Pages.Login.IndexModel
+@{
+    ViewData["Title"] = "התחברות";
+    Layout = "_Layout";
+    ViewData["NavClass"] = "login-page"; // נשתמש בזה להוסיף מחלקה ל־navbar
+}
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow rounded-4 p-4" style="width: 100%; max-width: 500px;">
+        @{
+            var infoMessage = Request.Query["info"];
+        }
+
+        @if (infoMessage == "register")
+        {
+            <div class="alert alert-info text-center">
+                Registe to our website for more
+            </div>
+        }
+
+        <h2 class="text-center mb-4 text-primary">התחברות למערכת</h2>
+
+        <form method="post" class="styled-form">
+            <div class="form-group mb-3">
+                <label>Gmail</label>
+                <input type="text" name="Gmail" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+                <label>Password</label>
+                <input type="password" name="Password" class="form-control" />
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" value="Login" class="btn btn-primary w-100" />
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger">@Model.ErrorMessage</div>
+            }
+        </form>
+
+        <hr />
+        <div class="text-center mt-3">
+            <a href="/Customers/Create" class="text-decoration-none">עוד לא רשום? צור משתמש חדש</a>
+        </div>
+    </div>
 </div>
+
+<style>
+    body {
+        background-color: #fff8f0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(184, 134, 11, 0.2);
+    }
+
+    h2.text-primary {
+        font-weight: 700;
+        color: #b8860b; /* gold-ish */
+    }
+
+    label {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+        border: 1px solid #ddd;
+        box-shadow: none;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+        .form-control:focus {
+            border-color: #b8860b;
+            box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.25);
+            outline: none;
+        }
+
+    .btn-primary {
+        background-color: #b8860b;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        border-radius: 0.75rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #a0760a;
+        }
+
+    .alert {
+        border-radius: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .text-center a {
+        color: #b8860b;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
+        .text-center a:hover {
+            text-decoration: none;
+            color: #a0760a;
+        }
+</style>

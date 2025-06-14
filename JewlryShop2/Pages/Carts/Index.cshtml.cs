@@ -25,7 +25,6 @@ namespace JewlryShop2.Pages.Carts
 
         {
 
-            // && i.Customer.Gmail == sessionGmail
 
             string sessionGmail = HttpContext.Session.GetString("Gmail");
             string sessionUserType = HttpContext.Session.GetString("UserType");
@@ -44,10 +43,6 @@ namespace JewlryShop2.Pages.Carts
             }
                
         }
-        //   Cart = await _context.Cart.ToListAsync();
-        //}
-        //    Cart = await _context.Cart.
-        //        Include(i => i.Customer && i.).ToListAsync();
-        //}
+       
     }
 }

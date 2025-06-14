@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Jewelrys.IndexModel
 
 @{
@@ -80,3 +80,98 @@
     }
 </div>
  
+ *@
+
+@page
+@model JewlryShop2.Pages.Jewelrys.IndexModel
+
+@{
+    ViewData["Title"] = "תכשיטים";
+}
+
+<!-- 🖼️ קרוסלה -->
+<div id="JewelryCarousel" class="carousel slide mb-5 shadow rounded overflow-hidden" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="@Url.Content("~/images/Rings.jpg")" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="טבעת פנינים" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/Girls.jpg")" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="סט טיפה" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/prettyGirl.jpg")" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="סט V" />
+        </div>
+        <div class="carousel-item">
+            <img src="@Url.Content("~/images/pictureForFirst.jpg")" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="סט פרפר" />
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#JewelryCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#JewelryCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- 🔍 טופס חיפוש -->
+<form method="get" class="styled-form container mb-4">
+    <div class="form-group mb-2">
+        <label class="form-label fw-semibold">Search by material:</label>
+        <input type="text" name="SearchString" class="form-control" placeholder="e.g gold" />
+    </div>
+    <div>
+        <input type="submit" value="Search 🔍" class="btn btn-gold me-2" />
+        <a asp-page="./Index" class="btn-link">Back to full List</a>
+    </div>
+</form>
+<!-- ➕ קישור ליצירת תכשיט חדש -->
+@if (HttpContext.Session.GetString("UserType") == "Admin")
+{
+    <div class="text-center mb-4">
+        <a class="btn btn-success px-4 py-2 fw-bold" asp-page="Create">+ הוסף תכשיט חדש</a>
+    </div>
+}
+<!-- 🧱 גריד של תכשיטים -->
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+        @foreach (var item in Model.Jewelry)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div style="height: 200px; overflow: hidden;">
+                        <img src="@Url.Content("~/images/" + item.ImageName)" class="card-img-top w-100" style="height: 100%; object-fit: cover;" alt="@item.JewelryName" />
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-gold">@item.JewelryName</h5>
+                        <p class="card-text mb-1">חומר: @item.Material</p>
+                        <p class="card-text text-success fw-bold">מחיר: ₪@item.Price</p>
+                        @if (HttpContext.Session.GetString("UserType") == "Customer")
+                        {
+                            <button class="btn btn-sm btn-outline-success add-to-cart-btn" data-jewelry-id="@item.JewelryID">
+                                +
+                            </button>
+                        }
+
+                    </div>
+                    <div class="card-footer d-flex justify-content-center gap-2 bg-light">
+                        @if (HttpContext.Session.GetString("UserType") == "Admin")
+                        {
+                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.JewelryID">ערוך</a>
+                        }
+                        @if (HttpContext.Session.GetString("UserType") == "Customer")
+                        {
+                            <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.JewelryID">פרטים</a>
+                        }
+                        <a class="btn btn-sm btn-outline-info" asp-page="/Reviews/Index" asp-route-id="@item.JewelryID">ביקורות</a>
+                        @if (HttpContext.Session.GetString("UserType") == "Admin")
+                        {
+                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.JewelryID">מחק</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

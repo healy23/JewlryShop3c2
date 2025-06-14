@@ -85,23 +85,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Carts/Index">Carts</a>
                         </li> *@
-                        <li class="nav-item">
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login/LogIn">LogIn</a>
+                            </li>
+                            
+                        }
+                       @*  <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login/LogIn">LogIn</a>
-                        </li>
+                        </li> *@
 
                     </ul>
-                 @*    // ניסיון לעשות לוג אאוט *@
+                 @*    // לוג אאוט *@
                     @* @if (string.IsNullOrEmpty(sessionUserType)) *@
                     @if (string.IsNullOrEmpty(sessionName))
                     {
-                        <span class=“navbar-text”>welcome Visitor</span>
+                        <span class=“navbar-text”>Welcome Visitor</span>
                     }
                     else 
                     {
-                        <span class=“navbar-text”>welcome @sessionName</span>
+                        <span class=“navbar-text”>Welcome @sessionName :)</span>
                         <div class=“d-flex”>
-                          @*   // בהתחלה הפייג אחרי זה השאר *@
-                            <a class=“btn btn-outline-dark btn-sm ms-1” href="/Login/Logout" role="button">Logout</a> 
+                            @*   //  בהתחלה הפייג אחרי זה השאר *@
+                            <a class="btn-logout" href="/Login/Logout" role="button">Logout</a>
                         </div>
                     }
                 </div>

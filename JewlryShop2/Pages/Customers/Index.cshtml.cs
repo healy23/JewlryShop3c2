@@ -24,10 +24,15 @@ namespace JewlryShop2.Pages.Customers
         public async Task OnGetAsync(string SearchString)
         {
             IQueryable<Customer> CustomersIQ = from c in _context.Customers select c;
+            //if (!string.IsNullOrEmpty(SearchString))
+            //{
+            //    CustomersIQ = CustomersIQ.Where(c => c.Name.Contains(SearchString) || c.LastName.Contains(SearchString));
+
+            //}
             if (!string.IsNullOrEmpty(SearchString))
             {
-                CustomersIQ = CustomersIQ.Where(c => c.Name.Contains(SearchString) || c.LastName.Contains(SearchString));
-               
+                CustomersIQ = CustomersIQ.Where(c => c.ClubMembership.Contains(SearchString)) ;
+
             }
 
             Customer = await CustomersIQ.ToListAsync();

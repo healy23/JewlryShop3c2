@@ -89,7 +89,7 @@
 
 <div class="table-wrapper">
     <div class="back-link">
-        <a asp-page="Create" class="btn-gold">➕ Create New Review</a>
+        <a asp-page="Create" class="btn-gold">+ Add New Review</a>
     </div>
 
     <form method="get" class="styled-form" style="margin-top: 30px;">
@@ -126,9 +126,17 @@
                     <td>@Html.DisplayFor(modelItem => item.Rewiew)</td>
                     <td>@Html.DisplayFor(modelItem => item.StarAmount)</td>
                     <td>
-                        <a asp-page="./Edit" asp-route-id="@item.ID" class="btn-link">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.ID" class="btn-link">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn-link danger">Delete</a>
+                        @if (HttpContext.Session.GetString("UserType") == "Admin")
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.ID" class="btn-link">Edit</a> 
+                        }
+
+                        <a asp-page="./Details" asp-route-id="@item.ID" class="btn-link">Details</a> 
+                        @if (HttpContext.Session.GetString("UserType") == "Admin")
+                        {
+                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.JewelryID">Delete</a>
+                        }
+                       
                     </td>
                 </tr>
             }

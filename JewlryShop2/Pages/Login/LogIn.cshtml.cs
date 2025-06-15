@@ -88,6 +88,7 @@ namespace JewlryShop2.Pages.Login
                 HttpContext.Session.SetString("Name", user.Name);
                 HttpContext.Session.SetString("UserType", isAdmin ? "Admin" : "Customer");
                 HttpContext.Session.SetInt32("CustomerId", user.ID);
+                //HttpContext.Session.SetInt32("UserId", user.Id);
 
                 return RedirectToPage("/Index");
             }

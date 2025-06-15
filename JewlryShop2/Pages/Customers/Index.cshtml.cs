@@ -29,6 +29,20 @@ namespace JewlryShop2.Pages.Customers
             //    CustomersIQ = CustomersIQ.Where(c => c.Name.Contains(SearchString) || c.LastName.Contains(SearchString));
 
             //}
+            string sessionGmail = HttpContext.Session.GetString("Gmail");
+            string sessionUserType = HttpContext.Session.GetString("UserType");
+
+            if (sessionUserType == "Admin")
+            {
+                Customer = await _context.Customers.ToListAsync();
+
+            }
+            // not working that the customer will only see himself
+            else
+            {
+                Customer = await _context.Customers.Where(i => i.Gmail == sessionGmail).ToListAsync();
+
+            }
             if (!string.IsNullOrEmpty(SearchString))
             {
                 CustomersIQ = CustomersIQ.Where(c => c.ClubMembership.Contains(SearchString)) ;

@@ -12,13 +12,9 @@ namespace JewlryShop2.Data
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Jewelry> Jewelrys { get; set; }
-
         public DbSet<Review> Reviews { get; set; }
-
-
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Item> Item { get; set; }
-
 
     }
 }

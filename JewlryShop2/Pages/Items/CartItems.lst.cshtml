@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Items.CartItemsModel
 
 @{
@@ -29,10 +29,7 @@
     <tbody>
         @foreach (var item in Model.CartItems) 
         {
-
-            @* TotalCartPrice += item.Jewelry.Price * item.Amount; *@   
             TotalCartPrice = TotalCartPrice + item.Jewelry.Price * item.Amount;
-
             <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Cart.Customer.Name)
@@ -53,3 +50,52 @@
     </tbody>
 </table>
 <span> Total Price: @TotalCartPrice</span>
+ *@
+
+
+@page
+@model JewlryShop2.Pages.Items.CartItemsModel
+
+@{
+    ViewData["Title"] = "Cart Items";
+    double TotalCartPrice = 0.00;
+}
+
+<div class="table-wrapper">
+    <h1 class="hero-title">Items in Cart #@Model.CartId</h1>
+
+    <p>
+        <a class="btn-gold" asp-page="Create">+ Add New Item</a>
+    </p>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Jewelry</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                TotalCartPrice += item.Jewelry.Price * item.Amount;
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Cart.Customer.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Jewelry.JewelryName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                    <td>
+                        <a class="btn-link" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a class="btn-link" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="btn-link danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-end fw-bold mt-3">
+        🧾 Total Price: ₪@TotalCartPrice.ToString("F2")
+    </div>
+</div>

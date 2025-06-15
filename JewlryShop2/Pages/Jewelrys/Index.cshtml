@@ -130,7 +130,7 @@
 @if (HttpContext.Session.GetString("UserType") == "Admin")
 {
     <div class="text-center mb-4">
-        <a class="btn btn-success px-4 py-2 fw-bold" asp-page="Create">+ הוסף תכשיט חדש</a>
+        <a class="btn btn-success px-4 py-2 fw-bold" asp-page="Create">+ Add new jewelry</a>
     </div>
 }
 <!-- 🧱 גריד של תכשיטים -->
@@ -145,8 +145,9 @@
                     </div>
                     <div class="card-body text-center">
                         <h5 class="card-title text-gold">@item.JewelryName</h5>
-                        <p class="card-text mb-1">חומר: @item.Material</p>
-                        <p class="card-text text-success fw-bold">מחיר: ₪@item.Price</p>
+                        <p class="card-text mb-1">Material: @item.Material</p>
+                        <p class="card-text text-success fw-bold">Price: ₪@item.Price</p>
+                      @*   // add + *@
                         @if (HttpContext.Session.GetString("UserType") == "Customer")
                         {
                             <button class="btn btn-sm btn-outline-success add-to-cart-btn" data-jewelry-id="@item.JewelryID">
@@ -158,20 +159,96 @@
                     <div class="card-footer d-flex justify-content-center gap-2 bg-light">
                         @if (HttpContext.Session.GetString("UserType") == "Admin")
                         {
-                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.JewelryID">ערוך</a>
+                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.JewelryID">Edit</a>
                         }
                         @if (HttpContext.Session.GetString("UserType") == "Customer")
                         {
-                            <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.JewelryID">פרטים</a>
+                            <a class="btn btn-sm btn-outline-info" asp-page="./Details" asp-route-id="@item.JewelryID">Details</a>
                         }
-                        <a class="btn btn-sm btn-outline-info" asp-page="/Reviews/Index" asp-route-id="@item.JewelryID">ביקורות</a>
+                        <a class="btn btn-sm btn-outline-info" asp-page="/Reviews/Index" asp-route-id="@item.JewelryID">Reviews</a>
                         @if (HttpContext.Session.GetString("UserType") == "Admin")
                         {
-                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.JewelryID">מחק</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.JewelryID">Delete</a>
                         }
                     </div>
                 </div>
             </div>
         }
+
+       
+
+    </div>
+
+</div>
+@* 
+<!-- Cart Selection Modal bootstarp-->
+<div class="modal fade" id="cartSelectModal" tabindex="-1" aria-labelledby="cartSelectLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartSelectLabel">Select Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select id="cartSelect" class="form-select mb-3">
+                    <option disabled selected>Loading your carts...</option>
+                </select>
+                <button id="confirmAddBtn" class="btn btn-primary w-100">Add to Cart</button>
+            </div>
+        </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script>
+        alert("Script section is running!");
+
+        let selectedJewelryId = null;
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            console.log("Binding click to:", btn); // ✅ Check if buttons are found
+
+            btn.addEventListener('click', function () {
+                alert("➕ Add button clicked for jewelry ID: " + this.dataset.jewelryId);
+                selectedJewelryId = this.dataset.jewelryId;
+
+                fetch('/api/UserCarts')
+                    .then(response => response.json())
+                    .then(carts => {
+                        const select = document.getElementById('cartSelect');
+                        select.innerHTML = '';
+                        carts.forEach(cart => {
+                            const option = document.createElement('option');
+                            option.value = cart.cartId;
+                            option.text = `Cart #${cart.cartId}`;
+                            select.appendChild(option);
+                        });
+
+                        const modal = new bootstrap.Modal(document.getElementById('cartSelectModal'));
+                        modal.show();
+                    });
+            });
+        });
+
+        document.getElementById('confirmAddBtn').addEventListener('click', function () {
+            const selectedCartId = document.getElementById('cartSelect').value;
+            alert("🛒 Adding to cart: " + selectedCartId + ", Jewelry ID: " + selectedJewelryId);
+
+            fetch('/api/addtocart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cartId: selectedCartId, jewelryId: selectedJewelryId })
+            }).then(res => {
+                if (res.ok) {
+                    alert('✅ Added successfully!');
+                    bootstrap.Modal.getInstance(document.getElementById('cartSelectModal')).hide();
+                } else {
+                    alert('❌ Failed to add.');
+                }
+            });
+        });
+    </script>
+}
+
+ *@

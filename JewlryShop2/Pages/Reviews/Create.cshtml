@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Reviews.CreateModel
 
 @{
@@ -48,4 +48,67 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ *@
+
+@page
+@model JewlryShop2.Pages.Reviews.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Leave a Review</h1>
+        <p class="hero-subtitle">Share your thoughts and rating about the jewelry you purchased</p>
+    </div>
+</section>
+
+<div class="form-container">
+    <form method="post" class="styled-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Review.Jewelry" class="form-label"></label>
+            <select asp-for="Review.JewelryID" class="form-control" asp-items="ViewBag.JewelryID">
+                <option disabled selected>— Select Jewelry —</option>
+            </select>
+            <span asp-validation-for="Review.JewelryID" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Review.Customer" class="form-label"></label>
+            <select asp-for="Review.CustomerID" class="form-control" asp-items="ViewBag.CustomerID">
+                <option disabled selected>— Select Customer —</option>
+            </select>
+            <span asp-validation-for="Review.CustomerID" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Review.StarAmount" class="form-label"></label>
+            <input asp-for="Review.StarAmount" class="form-control" />
+            <span asp-validation-for="Review.StarAmount" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Review.Rewiew" class="form-label"></label>
+            <input asp-for="Review.Rewiew" class="form-control" />
+            <span asp-validation-for="Review.Rewiew" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-gold">Submit Review</button>
+        </div>
+    </form>
+
+    <div class="back-link">
+        <a asp-page="Index" class="btn-link">← Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

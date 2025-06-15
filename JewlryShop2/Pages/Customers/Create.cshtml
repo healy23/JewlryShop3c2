@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Customers.CreateModel
 
 @{
@@ -57,3 +57,71 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+ *@
+@page
+@model JewlryShop2.Pages.Customers.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Create New Account</h1>
+        <p class="hero-subtitle">Welcome to our website — let's get you started</p>
+    </div>
+</section>
+
+<div class="form-container">
+    <form method="post" class="styled-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Customer.Name" class="form-label"></label>
+            <input asp-for="Customer.Name" class="form-control" />
+            <span asp-validation-for="Customer.Name" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Customer.LastName" class="form-label"></label>
+            <input asp-for="Customer.LastName" class="form-control" />
+            <span asp-validation-for="Customer.LastName" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Customer.Gmail" class="form-label"></label>
+            <input asp-for="Customer.Gmail" class="form-control" />
+            <span asp-validation-for="Customer.Gmail" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Customer.Password" class="form-label"></label>
+            <input asp-for="Customer.Password" type="password" class="form-control" />
+            <span asp-validation-for="Customer.Password" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Customer.ClubMembership" class="form-label"></label>
+            <select asp-for="Customer.ClubMembership" class="form-control">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+            <span asp-validation-for="Customer.ClubMembership" class="text-danger small-text"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-gold">Create Account</button>
+        </div>
+    </form>
+
+    @* <div class="back-link">
+        <a asp-page="Index" class="btn-link">← Back to List</a>
+    </div> *@
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

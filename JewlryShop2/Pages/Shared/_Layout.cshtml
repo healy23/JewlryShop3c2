@@ -51,6 +51,13 @@
                                 </li>
 
                             }
+                            @if (sessionUserType == "Customer")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Customers/Index">My Profile</a>
+                                </li>
+
+                            }
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Reviews/Index">Reviews</a>
@@ -101,12 +108,12 @@
                     @* @if (string.IsNullOrEmpty(sessionUserType)) *@
                     @if (string.IsNullOrEmpty(sessionName))
                     {
-                        <span class=“navbar-text”>Welcome Visitor</span>
+                        <span class="navbar-text">Welcome Visitor</span>
                     }
                     else 
                     {
-                        <span class=“navbar-text”>Welcome @sessionName :)</span>
-                        <div class=“d-flex”>
+                        <span class="navbar-text">Welcome @sessionName :)</span>
+                        <div class="d-flex">
                             @*   //  בהתחלה הפייג אחרי זה השאר *@
                             <a class="btn-logout" href="/Login/Logout" role="button">Logout</a>
                         </div>
@@ -120,16 +127,20 @@
         @RenderBody()
     </main>
 
-    @*   <div class="container">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div> *@
+    </div> 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    @* <p style="color:red">✅ Layout is applied</p> *@
+
+   
+
 </body>
 </html>

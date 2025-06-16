@@ -38,9 +38,6 @@ namespace JewlryShop2.Pages.Jewelrys
             Jewelry = jewelry;
             return Page();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -68,7 +65,6 @@ namespace JewlryShop2.Pages.Jewelrys
 
             return RedirectToPage("./Index");
         }
-
         private bool JewelryExists(int id)
         {
             return _context.Jewelrys.Any(e => e.JewelryID == id);

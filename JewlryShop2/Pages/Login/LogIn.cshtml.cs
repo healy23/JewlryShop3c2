@@ -63,7 +63,6 @@ namespace JewlryShop2.Pages.Login
     public class IndexModel : PageModel
     {
         private readonly JewlryShop2.Data.JewelryContext _context;
-
         public IndexModel(JewlryShop2.Data.JewelryContext context)
         {
             _context = context;
@@ -73,9 +72,7 @@ namespace JewlryShop2.Pages.Login
 
         [BindProperty]
         public string Password { get; set; } // Add this
-
         public string ErrorMessage { get; set; }
-
         public IActionResult OnPost()
         {
             var user = _context.Customers.FirstOrDefault(m => m.Gmail == Gmail && m.Password == Password);
@@ -88,8 +85,6 @@ namespace JewlryShop2.Pages.Login
                 HttpContext.Session.SetString("Name", user.Name);
                 HttpContext.Session.SetString("UserType", isAdmin ? "Admin" : "Customer");
                 HttpContext.Session.SetInt32("CustomerId", user.ID);
-                //HttpContext.Session.SetInt32("UserId", user.Id);
-
                 return RedirectToPage("/Index");
             }
             else

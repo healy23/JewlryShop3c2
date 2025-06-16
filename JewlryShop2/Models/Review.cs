@@ -8,14 +8,8 @@
         public Jewelry Jewelry { get; set; }
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
-
-
-        //public string ReviewerName { get; set; }
-
         public int StarAmount { get; set; }
         public string Rewiew { get; set; }
 
-        
-        
     }
 }

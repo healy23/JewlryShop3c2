@@ -8,5 +8,6 @@
         public Jewelry Jewelry { get; set; }
         public Cart Cart { get; set; }
         public int CartID { get; set; }
+
     }
 }

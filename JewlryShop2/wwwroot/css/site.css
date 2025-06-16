@@ -62,6 +62,8 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+/*// the design color-profile thead jewelry*/
+
 .grid-container
 {
     display: grid;
@@ -133,7 +135,7 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Buttons */
+/*My Buttons */
 .btn-gold {
     background-color: #bfa26f;
     color: white;
@@ -270,7 +272,7 @@ body {
 }
 
 
-/*/עיצוב הבאטן לוג אאוט צאטגיפיטי*/
+/*/עיצוב הבאטן לוג אאוט */
 .btn-logout {
     background-color: transparent;
     color: #bfa26f;

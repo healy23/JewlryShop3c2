@@ -9,13 +9,6 @@
         public string Material { get; set; }
 
         public string? ImageName { get; set; }
-
-
-
-        //public int CostumerID { get; set; }
-        //public Costumer CostumerI{ get; set; }
-
-
         public ICollection<Review> Reviews { get; set; }
         public List<Item> Items { get; set; }
 

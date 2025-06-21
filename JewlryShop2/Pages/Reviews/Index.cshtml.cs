@@ -22,21 +22,7 @@ namespace JewlryShop2.Pages.Reviews
 
         public IList<Review> Review { get;set; } = default!;
 
-        /*
-       public async Task OnGetAsync(string SearchString)
-        {
-            IQueryable<Review> ReviewsIQ = from r in _context.Reviews select r;
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                ReviewsIQ = ReviewsIQ.Where(r => r.StarAmount.Contains(SearchString));
-              
-            }
-
-            Review = await _context.Reviews
-                .Include(r => r.Customer)
-                .Include(r => r.Jewelry).ToListAsync();
-          
-        } */
+       
 
         public async Task OnGetAsync(string SearchString="", int id=0)
         {

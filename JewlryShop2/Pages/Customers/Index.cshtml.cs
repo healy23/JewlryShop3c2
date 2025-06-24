@@ -38,11 +38,14 @@ namespace JewlryShop2.Pages.Customers
 
             }
             // not working that the customer will only see himself
+            // not working that the customer will only see himself
             else
             {
-                Customer = await _context.Customers.Where(i => i.Gmail == sessionGmail).ToListAsync();
+                //Customer = await _context.Customers.Where(i => i.Gmail == sessionGmail).ToListAsync();
+                CustomersIQ = CustomersIQ.Where(i => i.Gmail == sessionGmail);
 
             }
+           
             if (!string.IsNullOrEmpty(SearchString))
             {
                 CustomersIQ = CustomersIQ.Where(c => c.ClubMembership.Contains(SearchString)) ;

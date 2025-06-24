@@ -304,3 +304,238 @@ body {
 }
 
 
+/*עיצוב מיי פרופייל*/
+/*
+.profile-card {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fffbe6;
+    border: 2px solid #d4af37;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-details div {
+    margin: 12px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.profile-details strong {
+    color: #d4af37;
+    width: 150px;
+    display: inline-block;
+}
+
+.profile-actions .btn-gold {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.hero-title {
+    color: #d4af37;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+*//*חלק 2 מיי פרופייל*/
+
+.profile-section {
+    padding: 40px 60px;
+    background: linear-gradient(to right, #fff0f6, #fffdf3); /* soft pink to soft gold */
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+}
+/* Rename hero-title and hero-subtitle */
+.profile-hero-title {
+    font-size: 36px;
+    color: #bfa26f;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: 900; /* make the font extra bold */
+    font-family: 'Segoe UI Black', 'Arial Black', Arial, sans-serif; /* fuller, heavier font */
+    letter-spacing: 1px; /* a little spacing between letters for impact */
+    text-transform: uppercase; /* optional: all caps for boldness */
+}
+/*.hero-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #bfa26f;
+    margin-bottom: 10px;
+}*/
+
+
+.profile-hero-subtitle {
+    font-size: 18px;
+    color: #cc6699;
+    margin-bottom: 30px;
+}
+
+.profile-row {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+    /* Rename .label to .profile-label */
+    .profile-row .profile-label {
+        font-weight: bold;
+        color: #d63384; /* pink label */
+        width: 160px;
+        display: inline-block;
+    }
+
+.profile-actions .profile-btn-gold {
+    background-color: #bfa26f;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    text-decoration: none; /* remove underline */
+}
+
+/* Rename danger link for profile context (optional) */
+.profile-btn-link-danger {
+    color: #dc3545;
+    text-decoration: none; /* remove underline */
+    cursor: pointer;
+}
+
+/*delete design*/
+
+.delete-box {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #ffffff;
+    border: 2px solid #f8d7da;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+}
+
+.delete-heading {
+    font-size: 28px;
+    color: #d9534f;
+    margin-bottom: 15px;
+}
+
+.delete-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.delete-details {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+    .delete-details div {
+        margin-bottom: 10px;
+    }
+
+.delete-action {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/*edit jewelry*/
+
+.edit-form-box {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #fff8f5;
+    border: 2px solid #eec1d9;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.edit-title {
+    font-size: 30px;
+    color: #cc6699;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.edit-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.edit-group {
+    margin-bottom: 20px;
+}
+
+.edit-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #444;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+
+.jewelry-create-container {
+    max-width: 650px;
+    margin: 50px auto;
+    background: linear-gradient(to bottom right, #fffefb, #fdf8f4); /* softer ivory shades */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05); /* subtle shadow only */
+    /* border: none — no borders at all */
+}
+
+.jewelry-create-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #d63384; /* pretty pink */
+    margin-bottom: 5px;
+}
+
+.jewelry-create-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #a88c5e; /* soft gold */
+    margin-bottom: 35px;
+}
+
+.jewelry-create-btn {
+    background: linear-gradient(to right, #d4af37, #f3d18d);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 10px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .jewelry-create-btn:hover {
+        background: linear-gradient(to right, #c69c2c, #efc66c);
+        transform: scale(1.02);
+    }
+
+/*
+jewelry delete*/

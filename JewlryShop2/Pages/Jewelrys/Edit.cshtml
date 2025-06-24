@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Jewelrys.EditModel
 
 @{
@@ -47,4 +47,57 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ *@
+
+@page
+@model JewlryShop2.Pages.Jewelrys.EditModel
+
+@{
+    ViewData["Title"] = "Edit Jewelry";
+}
+
+<section class="edit-form-box">
+    <h1 class="edit-title"> Edit Jewelry 💎</h1>
+    <p class="edit-subtitle">Update the jewelry details below:</p>
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Jewelry.JewelryID" />
+
+        <div class="edit-group">
+            <label asp-for="Jewelry.JewelryName" class="edit-label"></label>
+            <input asp-for="Jewelry.JewelryName" class="edit-input" />
+            <span asp-validation-for="Jewelry.JewelryName" class="text-danger"></span>
+        </div>
+
+        <div class="edit-group">
+            <label asp-for="Jewelry.Price" class="edit-label"></label>
+            <input asp-for="Jewelry.Price" class="edit-input" />
+            <span asp-validation-for="Jewelry.Price" class="text-danger"></span>
+        </div>
+
+        <div class="edit-group">
+            <label asp-for="Jewelry.Material" class="edit-label"></label>
+            <input asp-for="Jewelry.Material" class="edit-input" />
+            <span asp-validation-for="Jewelry.Material" class="text-danger"></span>
+        </div>
+
+        <div class="edit-group">
+            <label asp-for="Jewelry.ImageName" class="edit-label"></label>
+            <input asp-for="Jewelry.ImageName" class="edit-input" />
+            <span asp-validation-for="Jewelry.ImageName" class="text-danger"></span>
+        </div>
+
+        <div class="edit-actions">
+            <button type="submit" class="btn-gold">💾 Save</button>
+            <a asp-page="./Index" class="btn-link">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

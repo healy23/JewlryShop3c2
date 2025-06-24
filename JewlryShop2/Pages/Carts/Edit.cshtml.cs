@@ -22,9 +22,15 @@ namespace JewlryShop2.Pages.Carts
 
         [BindProperty]
         public Cart Cart { get; set; } = default!;
-
+        //public IActionResult OnGet()
+        //{
+        //    ViewData["CustomerID"] = new SelectList(_context.Customers, "ID", "Name");
+        //    return Page();
+        //}
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+
+            ViewData["CustomerID"] = new SelectList(_context.Customers, "ID", "Name");
             if (id == null)
             {
                 return NotFound();

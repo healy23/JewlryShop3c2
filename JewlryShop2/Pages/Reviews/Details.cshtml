@@ -5,39 +5,27 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<section class="form-container">
+    <h1 class="form-title" style="color: #d63384;">Review Details 🌟</h1>
 
-<div>
-    <h4>Review</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Review.StarAmount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Review.StarAmount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Review.Rewiew)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Review.Rewiew)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Review.Jewelry)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Review.Jewelry.JewelryName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Review.Customer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Review.Customer.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Review.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+    <div class="styled-details">
+        <dl>
+            <dt>Stars:</dt>
+            <dd>@Model.Review.StarAmount</dd>
+
+            <dt>Review Text:</dt>
+            <dd>@Model.Review.Rewiew</dd>
+
+            <dt>Jewelry:</dt>
+            <dd>@Model.Review.Jewelry?.JewelryName</dd>
+
+            <dt>Customer:</dt>
+            <dd>@Model.Review.Customer?.Name</dd>
+        </dl>
+    </div>
+
+    <div class="profile-actions mt-4">
+        <a class="btn-gold" asp-page="./Edit" asp-route-id="@Model.Review.ID">✏️ Edit</a>
+        <a class="btn-link ms-3" asp-page="./Index">← Back to List</a>
+    </div>
+</section>

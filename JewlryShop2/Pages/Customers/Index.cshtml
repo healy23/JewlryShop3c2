@@ -65,40 +65,43 @@
 </table>
  *@
 
-@page
+@* @page
 @model JewlryShop2.Pages.Customers.IndexModel
+
 
 @{
     ViewData["Title"] = "Customers";
 }
 
 <div class="table-wrapper">
-    <h1 class="hero-title">Customers</h1>
 
-    <p>
-        <a class="btn-gold" asp-page="Create">+ Add New Customer</a>
-    </p>
-    <form method="get" class="styled-form">
-        <div class="form-group search-bar-wrapper">
-            <label for="SearchString" class="form-label">Find by club membership:</label>
-            <div class="search-bar">
-                @* הפלייס הולדרק זה כאילו דוגמא *@
-                <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
-                <button type="submit" class="btn-gold">Search</button>
-                <a class="btn-link" asp-page="./Index">Back to Full List</a>
+    @{
+        string sessionGmail = HttpContext.Session.GetString("Gmail");
+        string sessionUserType = HttpContext.Session.GetString("UserType");
+    }
+
+    @if (sessionUserType == "Admin")
+    {
+        <h1 class="hero-title">Customers</h1>
+        <p>
+            <a class="btn-gold" asp-page="Create">+ Add New Customer</a>
+        </p>
+        <form method="get" class="styled-form">
+            <div class="form-group search-bar-wrapper">
+                <label for="SearchString" class="form-label">Find by club membership:</label>
+                <div class="search-bar">
+                  
+                    <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
+                    <button type="submit" class="btn-gold">Search</button>
+                    <a class="btn-link" asp-page="./Index">Back to Full List</a>
+                </div>
             </div>
-        </div>
-    </form>
-
-    @* <form method="get" class="styled-form">
-        <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
-            <label for="SearchString" class="form-label" style="margin: 0;">Find by club membership:</label>
-            
-            <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
-            <input type="submit" value="Search" class="btn-gold" />
-            <a class="btn-link" asp-page="./Index">Back to Full List</a>
-        </div> *@
-    @* </form> *@
+        </form>
+    }
+    else 
+    {
+        <h1 class="hero-title">My Profile</h1>
+    }
 
     <table class="styled-table">
         <thead>
@@ -128,3 +131,84 @@
         </tbody>
     </table>
 </div>
+ *@
+
+@page
+@model JewlryShop2.Pages.Customers.IndexModel
+
+@{
+    ViewData["Title"] = "My Profile";
+    var sessionGmail = HttpContext.Session.GetString("Gmail");
+    var sessionUserType = HttpContext.Session.GetString("UserType");
+    var customer = Model.Customer.FirstOrDefault(c => c.Gmail == sessionGmail);
+}
+
+@if (sessionUserType == "Admin")
+{
+    <div class="table-wrapper">
+        <h1 class="hero-title">Customers</h1>
+        <p>
+            <a class="btn-gold" asp-page="Create">+ Add New Customer</a>
+        </p>
+
+        <form method="get" class="styled-form">
+            <div class="form-group search-bar-wrapper">
+                <label for="SearchString" class="form-label">Find by club membership:</label>
+                <div class="search-bar">
+                    <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="e.g. yes" />
+                    <button type="submit" class="btn-gold">Search</button>
+                    <a class="btn-link" asp-page="./Index">Back to Full List</a>
+                </div>
+            </div>
+        </form>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Club Membership</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Customer)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Gmail</td>
+                        <td>@item.ClubMembership</td>
+                        <td>
+                            <a class="btn-link" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a class="btn-link" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                            <a class="btn-link danger" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else if (customer != null)
+{
+    <section class="profile-section">
+        <h1 class="profile-hero-title"> My Profile 🌸</h1>
+        <p class="profile-hero-subtitle">Welcome back, @customer.Name! Here are your details:</p>
+
+        <div class="profile-row"><span class="profile-label">First Name:</span> @customer.Name</div>
+        <div class="profile-row"><span class="profile-label">Last Name:</span> @customer.LastName</div>
+        <div class="profile-row"><span class="profile-label">Email:</span> @customer.Gmail</div>
+        <div class="profile-row"><span class="profile-label">Club Membership:</span> @customer.ClubMembership</div>
+
+        <div class="profile-actions mt-4">
+            <a class="profile-btn-gold" asp-page="./Edit" asp-route-id="@customer.ID">✏️ Edit Profile</a>
+            <a class="profile-btn-link-danger ms-3" asp-page="./Delete" asp-route-id="@customer.ID">🗑️ Delete Account</a>
+        </div>
+    </section>
+}
+else
+{
+    <p>Profile not found.</p>
+}

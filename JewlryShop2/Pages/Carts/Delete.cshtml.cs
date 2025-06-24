@@ -22,6 +22,25 @@ namespace JewlryShop2.Pages.Carts
         [BindProperty]
         public Cart Cart { get; set; } = default!;
 
+        //public async Task<IActionResult> OnGetAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var cart = await _context.Cart.FirstOrDefaultAsync(m => m.CartId == id);
+
+        //    if (cart == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        Cart = cart;
+        //    }
+        //    return Page();
+        //}
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -29,18 +48,35 @@ namespace JewlryShop2.Pages.Carts
                 return NotFound();
             }
 
-            var cart = await _context.Cart.FirstOrDefaultAsync(m => m.CartId == id);
+            Cart = await _context.Cart
+                .Include(c => c.Customer) // include the customer!
+                .FirstOrDefaultAsync(m => m.CartId == id);
 
-            if (cart == null)
+            if (Cart == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Cart = cart;
-            }
             return Page();
         }
+
+
+        //public async Task<IActionResult> OnPostAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var cart = await _context.Cart.FindAsync(id);
+        //    if (cart != null)
+        //    {
+        //        Cart = cart;
+        //        _context.Cart.Remove(Cart);
+        //        await _context.SaveChangesAsync();
+        //    }
+
+        //    return RedirectToPage("./Index");
+        //}
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
@@ -49,15 +85,18 @@ namespace JewlryShop2.Pages.Carts
                 return NotFound();
             }
 
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart != null)
+            Cart = await _context.Cart
+                .Include(c => c.Customer) // include this if you access Customer after post
+                .FirstOrDefaultAsync(m => m.CartId == id);
+
+            if (Cart != null)
             {
-                Cart = cart;
                 _context.Cart.Remove(Cart);
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");
         }
+
     }
 }

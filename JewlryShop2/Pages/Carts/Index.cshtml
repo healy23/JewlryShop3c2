@@ -73,8 +73,13 @@
                     <td>@Html.DisplayFor(modelItem => item.CartId)</td>
                     <td>
                         <a class="btn-gold" asp-page="/Items/CartItems.lst" asp-route-CartId="@item.CartId">Items in cart</a> |
-                        <a class="btn-link" asp-page="./Edit" asp-route-id="@item.CartId">Edit</a> |
-                        <a class="btn-link" asp-page="./Details" asp-route-id="@item.CartId">Details</a> |
+                        @if (HttpContext.Session.GetString("UserType") == "Admin")
+                        {
+                              <a class="btn-link" asp-page="./Edit" asp-route-id="@item.CartId">Edit</a>
+                                        
+                        }
+                        @* <a class="btn-link" asp-page="./Edit" asp-route-id="@item.CartId">Edit</a> | *@
+                       @*  <a class="btn-link" asp-page="./Details" asp-route-id="@item.CartId">Details</a> | *@
                         <a class="btn-link danger" asp-page="./Delete" asp-route-id="@item.CartId">Delete</a>
                     </td>
                 </tr>

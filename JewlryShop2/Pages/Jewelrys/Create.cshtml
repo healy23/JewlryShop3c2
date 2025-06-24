@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model JewlryShop2.Pages.Jewelrys.CreateModel
 
 @{
@@ -27,7 +27,7 @@
                 <label asp-for="Jewelry.Material" class="control-label"></label>
                 <label asp-for="Jewelry.Material" class="control-label"></label>
                 <select asp-for="Jewelry.Material" class="form-control">
-                    @*   // אופציית בחירה של חומר התכשיט *@
+                  
                     <option>Gold</option>
                     <option>Rose</option>
                     <option>Silver</option>
@@ -53,4 +53,70 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ *@
+@page
+@model JewlryShop2.Pages.Jewelrys.CreateModel
+
+@{
+    ViewData["Title"] = "Create Jewelry";
+}
+
+<section class="form-container">
+    <div class="jewelry-create-container">
+        <h1 class="jewelry-create-title">Add New Jewelry 💍</h1>
+        <p class="jewelry-create-subtitle">Add a new masterpiece to your collection</p>
+
+        @* <form method="post">
+            <!-- fields -->
+            <button type="submit" class="jewelry-create-btn">Create</button>
+        </form> *@
+    </div>
+
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="styled-form">
+            <div class="form-group">
+                <label asp-for="Jewelry.JewelryName" class="form-label"></label>
+                <input asp-for="Jewelry.JewelryName" class="form-control" />
+                <span asp-validation-for="Jewelry.JewelryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Jewelry.Price" class="form-label"></label>
+                <input asp-for="Jewelry.Price" class="form-control" />
+                <span asp-validation-for="Jewelry.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Jewelry.Material" class="form-label"></label>
+                <select asp-for="Jewelry.Material" class="form-control">
+                    <option disabled selected>Choose material</option>
+                    <option>Gold</option>
+                    <option>Rose</option>
+                    <option>Silver</option>
+                </select>
+                <span asp-validation-for="Jewelry.Material" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Jewelry.ImageName" class="form-label"></label>
+                <input asp-for="Jewelry.ImageName" class="form-control" />
+                <span asp-validation-for="Jewelry.ImageName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn-gold">Create</button>
+                <a asp-page="Index" class="btn-link ms-3">Cancel</a>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
